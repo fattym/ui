@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -5,13 +6,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <title>Elimu PEPE — Plans</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet">
 <style>
-
+/* ═══════════════════════════ TOKENS ══════════════════════════ */
 :root {
-  --font:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
+  --font:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
   /* Brand */
   --brand-blue:#00AEEF; --brand-red:#E84040; --brand-green:#2DBD6E; --brand-teal:#00967D;
   /* Surfaces */
@@ -95,6 +93,17 @@ img{display:block;max-width:100%;}
   color:var(--t2);transition:all 180ms var(--ease);flex-shrink:0;
 }
 .btn-icon:hover{background:var(--surface-3);color:var(--t1);}
+.btn-login{
+  display:flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:800;letter-spacing:.02em;
+  padding:7px 14px;border-radius:var(--r8);
+  background:#2DBD6E;color:#fff;
+  border:1.5px solid #25a85e;
+  transition:all 180ms var(--ease);white-space:nowrap;
+  box-shadow:0 2px 8px rgba(45,189,110,.30);
+}
+.btn-login:hover{background:#25a85e;box-shadow:0 4px 14px rgba(45,189,110,.40);}
+.btn-login:active{transform:scale(.97);}
 @media(max-width:380px){.topbar-tag{display:none;}.topbar-vdiv{display:none;}}
 
 /* ═══════════════════════════ DESKTOP SIDEBAR + CONTENT ═══════ */
@@ -148,12 +157,13 @@ img{display:block;max-width:100%;}
 .content{
   overflow-y:auto;padding:20px;
   display:flex;flex-direction:column;gap:16px;background:var(--bg);
+  width:100%;min-width:0;
 }
 @media(max-width:900px){.content{padding-bottom:calc(var(--bottom-h) + 16px + env(safe-area-inset-bottom));}}
 @media(max-width:480px){.content{padding:12px;padding-bottom:calc(var(--bottom-h) + 12px + env(safe-area-inset-bottom));}}
 
 /* ═══════════════════════════ PLAN PANEL ═════════════════════ */
-.plan-panel{display:none;flex-direction:column;gap:16px;}
+.plan-panel{display:none;flex-direction:column;gap:16px;width:100%;min-width:0;}
 .plan-panel.active{display:flex;}
 
 /* ═══════════════════════════ PANEL HEADER ═══════════════════ */
@@ -184,12 +194,17 @@ img{display:block;max-width:100%;}
 
 /* ═══════════════════════════ CARDS GRID ════════════════════ */
 .cards-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));
-  gap:12px;
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:10px;
+  width:100%;
 }
-@media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr;gap:10px;}}
-@media(max-width:400px){.cards-grid{grid-template-columns:1fr;}}
+@media screen and (min-width:700px){
+  .cards-grid{grid-template-columns:repeat(3,1fr) !important;gap:14px;}
+}
+@media screen and (max-width:340px){
+  .cards-grid{grid-template-columns:1fr !important;}
+}
 
 /* ═══════════════════════════ PLAN CARD (compact trigger) ════ */
 .plan-card{
@@ -210,7 +225,7 @@ img{display:block;max-width:100%;}
 .card-body{padding:14px;display:flex;flex-direction:column;gap:10px;flex:1;}
 
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;}
-.card-name{font-size:12px;font-weight:700;color:var(--t2);line-height:1.4;flex:1;}
+.card-name{font-size:11px;font-weight:700;color:var(--t2);line-height:1.35;flex:1;word-break:break-word;}
 .card-badge{
   font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
   padding:2px 7px;border-radius:var(--r99);background:var(--cc);color:#fff;
@@ -219,7 +234,7 @@ img{display:block;max-width:100%;}
 
 .card-price-row{display:flex;align-items:baseline;gap:4px;}
 .card-kes{font-size:11px;font-weight:700;color:var(--cc);align-self:flex-start;margin-top:4px;opacity:.85;}
-.card-price{font-size:2.1rem;font-weight:900;letter-spacing:-.04em;color:var(--cc);line-height:1;font-variant-numeric:tabular-nums lining-nums;}
+.card-price{font-size:clamp(1.5rem,5vw,2.1rem);font-weight:900;letter-spacing:-.04em;color:var(--cc);line-height:1;font-variant-numeric:tabular-nums lining-nums;}
 .card-period{font-size:11px;font-weight:500;color:var(--t3);align-self:flex-end;margin-bottom:2px;}
 
 .card-tags{display:flex;flex-wrap:wrap;gap:5px;}
@@ -460,6 +475,126 @@ img{display:block;max-width:100%;}
   .phdr-title{font-size:1.25rem;}
   .phdr-sub{font-size:12px;}
 }
+
+/* ═══════════════════════════ HOME PANEL ════════════════════ */
+.home-hero{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r16);padding:0;box-shadow:var(--sh-md);
+  position:relative;overflow:hidden;min-height:260px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+}
+.home-hero-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center 30%;
+  display:block;z-index:0;
+}
+.home-hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.10) 0%,
+    rgba(0,0,0,0.45) 40%,
+    rgba(0,10,30,0.82) 100%
+  );
+}
+.home-hero-content{
+  position:relative;z-index:2;
+  padding:22px 20px 20px;
+}
+.home-hero::before{display:none;}
+.home-hero-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:3px 10px;border-radius:var(--r99);margin-bottom:10px;
+  background:rgba(0,174,239,.25);color:#fff;border:1px solid rgba(0,174,239,.45);
+}
+.home-hero-title{
+  font-size:clamp(1.5rem,5vw,2.2rem);font-weight:900;
+  letter-spacing:-.03em;line-height:1.15;color:#fff;margin-bottom:10px;
+  text-shadow:0 2px 12px rgba(0,0,0,0.3);
+}
+.home-hero-sub{
+  font-size:13px;color:rgba(255,255,255,0.85);line-height:1.65;
+  max-width:52ch;margin-bottom:16px;
+  text-shadow:0 1px 6px rgba(0,0,0,0.3);
+}
+.home-cta-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.home-cta-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:800;padding:10px 18px;
+  border-radius:var(--r8);background:var(--brand-blue);color:#fff;
+  border:none;cursor:pointer;transition:all 180ms var(--ease);
+  box-shadow:0 2px 10px rgba(0,174,239,.35);
+}
+.home-cta-btn:hover{background:#0098d4;box-shadow:0 4px 16px rgba(0,174,239,.40);}
+.home-cta-btn:active{transform:scale(.97);}
+.home-cta-ghost{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:13px;font-weight:700;padding:10px 16px;
+  border-radius:var(--r8);background:rgba(255,255,255,0.15);color:#fff;
+  border:1px solid rgba(255,255,255,0.35);transition:all 180ms var(--ease);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+}
+.home-cta-ghost:hover{background:rgba(255,255,255,0.25);border-color:rgba(255,255,255,0.5);}
+
+.home-stats-row{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
+}
+@media screen and (max-width:400px){.home-stats-row{grid-template-columns:repeat(2,1fr);}}
+.home-stat{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r12);
+  padding:12px 8px;text-align:center;box-shadow:var(--sh-xs);
+}
+.hs-v{display:block;font-size:14px;font-weight:900;color:var(--brand-blue);letter-spacing:-.02em;}
+.hs-l{display:block;font-size:10px;font-weight:600;color:var(--t3);margin-top:2px;text-transform:uppercase;letter-spacing:.04em;}
+
+.home-section-lbl{
+  font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--t3);margin-top:4px;margin-bottom:2px;padding-left:2px;
+}
+
+.home-feats{
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:10px;
+}
+@media screen and (min-width:700px){
+  .home-feats{grid-template-columns:repeat(3,1fr) !important;}
+}
+.hf-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r12);padding:14px 12px;box-shadow:var(--sh-xs);
+}
+.hf-icon{
+  width:34px;height:34px;border-radius:var(--r8);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;margin-bottom:8px;
+}
+.hf-title{font-size:12px;font-weight:800;color:var(--t1);margin-bottom:4px;}
+.hf-sub{font-size:11px;color:var(--t2);line-height:1.5;}
+
+.home-plan-row{
+  display:grid !important;
+  grid-template-columns:repeat(3,1fr) !important;
+  gap:10px;
+}
+@media screen and (max-width:360px){
+  .home-plan-row{grid-template-columns:1fr !important;}
+}
+.hpr-card{
+  background:var(--surface);border:1.5px solid var(--border);
+  border-radius:var(--r12);padding:14px 10px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  cursor:pointer;transition:all 180ms var(--ease);
+  box-shadow:var(--sh-xs);text-align:center;
+}
+.hpr-card:hover{border-color:var(--hc);transform:translateY(-2px);box-shadow:var(--sh-sm);}
+.hpr-card:active{transform:scale(.97);}
+.hpr-icon{font-size:1.4rem;margin-bottom:2px;}
+.hpr-name{font-size:12px;font-weight:800;color:var(--t1);}
+.hpr-price{font-size:11px;font-weight:600;color:var(--hc);}
+.hpr-arrow{font-size:18px;font-weight:700;color:var(--hc);line-height:1;margin-top:2px;}
+
 </style>
 </head>
 <body>
@@ -474,6 +609,10 @@ img{display:block;max-width:100%;}
     <span class="topbar-tag">Powered by Loho Learning</span>
   </div>
   <div class="topbar-right">
+    <a href="https://elimupepe.loholearning.co.ke/login" target="_blank" rel="noopener noreferrer" class="btn-login">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
+      Login
+    </a>
     <a href="tel:+254797349396" class="topbar-phone">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.18 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
       <span>+254 797 349 396</span>
@@ -490,7 +629,12 @@ img{display:block;max-width:100%;}
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="sidebar-lbl">Access Plans</div>
-    <div class="s-tab active" data-panel="daily" style="--tc:var(--daily);--ts:var(--daily-s);">
+    <div class="s-tab active" data-panel="home" style="--tc:#00AEEF;--ts:rgba(0,174,239,0.09);">
+      <div class="s-tab-dot"></div>
+      <div class="s-tab-body"><div class="s-tab-name">Home</div><div class="s-tab-meta">About Elimu PEPE</div></div>
+      <div class="s-tab-price" style="color:#00AEEF;">Info</div>
+    </div>
+    <div class="s-tab" data-panel="daily" style="--tc:var(--daily);--ts:var(--daily-s);">
       <div class="s-tab-dot"></div>
       <div class="s-tab-body"><div class="s-tab-name">Daily Access</div><div class="s-tab-meta">4 plans · 1 day</div></div>
       <div class="s-tab-price">KES 10+</div>
@@ -520,8 +664,105 @@ img{display:block;max-width:100%;}
   <!-- CONTENT -->
   <div class="content" id="content">
 
+    <!-- ══ HOME PANEL ═════════════════════════════════════ -->
+    <div class="plan-panel active" id="panel-home">
+
+      <!-- Hero card -->
+      <div class="home-hero">
+        <img class="home-hero-img" src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/b540578c169db6c2a98df5e767cb3c3502c62185.jpg" alt="Kenyan students learning on a tablet" width="735" height="450" loading="lazy" decoding="async"/>
+        <div class="home-hero-overlay"></div>
+        <div class="home-hero-content">
+        <div class="home-hero-badge">🎓 Kenya's #1 Student Platform</div>
+        <h1 class="home-hero-title">Learn Smarter.<br>Compete Nationally.</h1>
+        <p class="home-hero-sub">Elimu PEPE is a Safaricom-powered e-learning platform built for Kenyan students — CBC &amp; 8-4-4. Access notes, past papers, quizzes, and the national Elimu Quest competition from your phone.</p>
+        <div class="home-cta-row">
+          <button class="home-cta-btn" onclick="activatePanel('daily')">View Plans <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+          <a href="tel:+254797349396" class="home-cta-ghost">📞 Call Us</a>
+        </div>
+        </div><!-- /home-hero-content -->
+      </div>
+
+      <!-- Stats row -->
+      <div class="home-stats-row">
+        <div class="home-stat"><span class="hs-v">CBC</span><span class="hs-l">Curriculum</span></div>
+        <div class="home-stat"><span class="hs-v">8-4-4</span><span class="hs-l">Curriculum</span></div>
+        <div class="home-stat"><span class="hs-v">M-PESA</span><span class="hs-l">Payments</span></div>
+        <div class="home-stat"><span class="hs-v">24/7</span><span class="hs-l">Access</span></div>
+      </div>
+
+      <!-- Features grid -->
+      <div class="home-section-lbl">What you get</div>
+      <div class="home-feats">
+        <div class="hf-card">
+          <div class="hf-icon" style="background:rgba(0,174,239,.10);">📝</div>
+          <div class="hf-title">Study Materials</div>
+          <div class="hf-sub">Notes, summaries &amp; revision guides for all subjects across both curricula.</div>
+        </div>
+        <div class="hf-card">
+          <div class="hf-icon" style="background:rgba(255,199,0,.12);">🏆</div>
+          <div class="hf-title">Elimu Quest</div>
+          <div class="hf-sub">Compete in national quiz challenges. Earn badges, climb the leaderboard.</div>
+        </div>
+        <div class="hf-card">
+          <div class="hf-icon" style="background:rgba(45,189,110,.10);">📄</div>
+          <div class="hf-title">Past Papers</div>
+          <div class="hf-sub">KCPE &amp; KCSE past papers with marking schemes. Practise exam-style questions.</div>
+        </div>
+        <div class="hf-card">
+          <div class="hf-icon" style="background:rgba(123,47,190,.10);">💻</div>
+          <div class="hf-title">Quero Coding</div>
+          <div class="hf-sub">Optional coding curriculum for yearly subscribers. Build real-world skills.</div>
+        </div>
+        <div class="hf-card">
+          <div class="hf-icon" style="background:rgba(255,107,43,.10);">📶</div>
+          <div class="hf-title">Data Bundles</div>
+          <div class="hf-sub">Select plans include Safaricom data — no extra cost. Learn even on bundles.</div>
+        </div>
+        <div class="hf-card">
+          <div class="hf-icon" style="background:rgba(232,64,64,.10);">👨‍👩‍👧</div>
+          <div class="hf-title">Parent Dashboard</div>
+          <div class="hf-sub">Monitor your child's progress, activity, and performance in real time.</div>
+        </div>
+      </div>
+
+      <!-- Plans summary row -->
+      <div class="home-section-lbl">Plans at a glance</div>
+      <div class="home-plan-row">
+        <div class="hpr-card" style="--hc:var(--daily);" onclick="activatePanel('daily')">
+          <div class="hpr-icon">📅</div>
+          <div class="hpr-name">Daily</div>
+          <div class="hpr-price">from KES 10</div>
+          <div class="hpr-arrow">›</div>
+        </div>
+        <div class="hpr-card" style="--hc:var(--termly);" onclick="activatePanel('termly')">
+          <div class="hpr-icon">📚</div>
+          <div class="hpr-name">Termly</div>
+          <div class="hpr-price">from KES 800</div>
+          <div class="hpr-arrow">›</div>
+        </div>
+        <div class="hpr-card" style="--hc:var(--yearly);" onclick="activatePanel('yearly')">
+          <div class="hpr-icon">⭐</div>
+          <div class="hpr-name">Yearly</div>
+          <div class="hpr-price">from KES 2,000</div>
+          <div class="hpr-arrow">›</div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-phone">
+          <div class="footer-phone-icon">📞</div>
+          <div><div class="footer-phone-lbl">Call Us 24/7</div><div class="footer-phone-val">+254 797 349 396</div></div>
+        </div>
+        <div class="footer-links">
+          <a href="mailto:support@loholearning.co.ke" class="footer-link">support@loholearning.co.ke</a>
+          <span class="footer-link">Funzi Road, Nairobi</span>
+        </div>
+        <div class="footer-copy">© 2025 Elimu PEPE · Powered by Loho Learning</div>
+      </div>
+    </div>
+
     <!-- ══ DAILY PANEL ════════════════════════════════════ -->
-    <div class="plan-panel active" id="panel-daily">
+    <div class="plan-panel" id="panel-daily">
 
       <div class="panel-hdr">
         <div class="phdr-left">
@@ -654,7 +895,12 @@ img{display:block;max-width:100%;}
 
 <!-- ══ MOBILE BOTTOM NAV ═══════════════════════════════════ -->
 <nav class="bottom-nav" id="bottom-nav" aria-label="Plan categories">
-  <div class="bn-item active" data-panel="daily" style="--bnc:var(--daily);">
+  <div class="bn-item active" data-panel="home" style="--bnc:#00AEEF;">
+    <div class="bn-dot">🏠</div>
+    <div class="bn-label">Home</div>
+    <div class="bn-sub">About us</div>
+  </div>
+  <div class="bn-item" data-panel="daily" style="--bnc:var(--daily);">
     <div class="bn-dot">📅</div>
     <div class="bn-label">Daily</div>
     <div class="bn-sub">from KES 10</div>
@@ -1012,6 +1258,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); }
     panels.forEach(p => p.classList.toggle('active', p.id==='panel-'+id));
     content.scrollTop = 0;
   }
+  window.activatePanel = activate;
 
   sTabs.forEach(t => t.addEventListener('click', () => activate(t.dataset.panel)));
   bnItems.forEach(t => t.addEventListener('click', () => activate(t.dataset.panel)));
